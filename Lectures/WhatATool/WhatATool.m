@@ -9,14 +9,14 @@ void section1() {
 	path = [path stringByExpandingTildeInPath];  
 	
 	NSString *expanded = [@"My home folder is at " stringByAppendingString:path];
-	NSLog(expanded);
+	NSLog(@"%@",expanded);
 	
 	NSArray *listItems = [path pathComponents];
 	
 	NSEnumerator *en = [listItems objectEnumerator];
 	
 	while(path = [en nextObject]) {
-		NSLog(path);
+		NSLog(@"%@",path);
 	}	
 }
 
@@ -30,15 +30,26 @@ void section2() {
 
 /* Section 3: A little bookmark dictionary */
 void section3(){
-	
-	// TODO Ver lecture 2 =)
-	
-	//NSMutableDictionary *aDictionary;
-		
-	//[[aDictionary objectForKey:@"Stanford University"] "http://www.stanford.edu"];
-	
-	//[aDictionary removeObjectForKey:theKey];
-	//[anObject someMessage];
+        
+	NSMutableDictionary *aDictionary = [[NSMutableDictionary alloc] init];;
+    
+	[aDictionary setObject:[NSURL URLWithString:@"http://www.stanford.edu"] forKey:@"Standford"];
+    [aDictionary setObject:[NSURL URLWithString:@"http://www.apple.com"] forKey:@"Apple"];
+    [aDictionary setObject:[NSURL URLWithString:@"http://cs193p.stanford.edu"] forKey:@"CS193P"];
+	[aDictionary setObject:[NSURL URLWithString:@"http://itunes.stanford.edu"] forKey:@"Stanford on iTunes U"];
+    [aDictionary setObject:[NSURL URLWithString:@"http://stanfordshop.com"] forKey:@"Stanford Mall"];
+
+    NSLog(@"%@", aDictionary);
+    
+    NSArray *keys = [aDictionary allKeys];
+    
+	// values in foreach loop
+	for (NSString *key in keys) {
+        if ([key hasPrefix:@"Stanford"]) {
+            NSLog(@"Key: '%@' URL: '%@'",key, [aDictionary objectForKey:key]);
+        }
+	}
+     
 }
 
 int main (int argc, const char * argv[]) {
