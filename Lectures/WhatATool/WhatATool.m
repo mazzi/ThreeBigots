@@ -49,6 +49,8 @@ void section3(){
             NSLog(@"Key: '%@' URL: '%@'",key, [aDictionary objectForKey:key]);
         }
 	}
+    
+    [aDictionary release];
 }
 
 
@@ -64,29 +66,37 @@ void section4(){
     
     for(NSObject *obj in myArray) {
         NSLog(@"Class name   : '%@'", [obj className] );
+        
+        NSString *member = @"Is member of NSString";
         if ([obj isMemberOfClass:[NSString class]]) {
-            NSLog(@"Is member of NSString YES");
+            NSLog(@"%@", [member stringByAppendingString: @" YES"]);
         } else {
-            NSLog(@"Is member of NSString NO");
+            NSLog(@"%@", [member stringByAppendingString: @" NO"]);
         }
+        
+        NSString *kind = @"Is kind of NSString";
         if ([obj isKindOfClass:[NSString class]]) {
-            NSLog(@"Is kind of NSString YES");
+            NSLog(@"%@", [kind stringByAppendingString: @" YES"]);
         } else {
-            NSLog(@"Is kind of NSString NO");
+            NSLog(@"%@", [kind stringByAppendingString: @" NO"]);
         }
+        
+        NSString *lowerCase = @"Responds to lowercaseString";
         if ([obj respondsToSelector:@selector(lowercaseString)]) {
-            NSLog(@"Responds to lowercaseString YES");
+            NSLog(@"%@", [lowerCase stringByAppendingString: @" YES"]);
             NSLog(@"lowercaseString is : '%@'", [(NSString *)obj lowercaseString] );
         } else {
-            NSLog(@"Responds to lowercaseString NO");
+            NSLog(@"%@", [lowerCase stringByAppendingString: @" NO"]);
         }
     }
     
+    [myArray release];
 }
 
 int main (int argc, const char * argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
+    section3();
 	section4();
 	
     [pool drain];
