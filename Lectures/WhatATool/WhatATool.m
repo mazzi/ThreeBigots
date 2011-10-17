@@ -31,7 +31,7 @@ void section2() {
 /* Section 3: A little bookmark dictionary */
 void section3(){
         
-	NSMutableDictionary *aDictionary = [[NSMutableDictionary alloc] init];;
+	NSMutableDictionary *aDictionary = [[NSMutableDictionary alloc] init];
     
 	[aDictionary setObject:[NSURL URLWithString:@"http://www.stanford.edu"] forKey:@"Standford"];
     [aDictionary setObject:[NSURL URLWithString:@"http://www.apple.com"] forKey:@"Apple"];
@@ -49,13 +49,45 @@ void section3(){
             NSLog(@"Key: '%@' URL: '%@'",key, [aDictionary objectForKey:key]);
         }
 	}
-     
+}
+
+
+/* Section 4: Selectors, Classes and Introspection */
+void section4(){
+
+    NSMutableArray *myArray = [[NSMutableArray alloc] init];
+    
+    [myArray addObject:[NSString stringWithFormat:@"Cadena1"]];
+    [myArray addObject:[NSNumber numberWithInt:65]];
+    [myArray addObject:[NSString stringWithFormat:@"Cadena2"]];
+    [myArray addObject:[NSNumber numberWithInt:99]];
+    
+    for(NSObject *obj in myArray) {
+        NSLog(@"Class name   : '%@'", [obj className] );
+        if ([obj isMemberOfClass:[NSString class]]) {
+            NSLog(@"Is member of NSString YES");
+        } else {
+            NSLog(@"Is member of NSString NO");
+        }
+        if ([obj isKindOfClass:[NSString class]]) {
+            NSLog(@"Is kind of NSString YES");
+        } else {
+            NSLog(@"Is kind of NSString NO");
+        }
+        if ([obj respondsToSelector:@selector(lowercaseString)]) {
+            NSLog(@"Responds to lowercaseString YES");
+            NSLog(@"lowercaseString is : '%@'", [(NSString *)obj lowercaseString] );
+        } else {
+            NSLog(@"Responds to lowercaseString NO");
+        }
+    }
+    
 }
 
 int main (int argc, const char * argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
-	section3();
+	section4();
 	
     [pool drain];
     return 0;
