@@ -2,8 +2,10 @@
 #import <Foundation/NSPathUtilities.h>
 #import <Foundation/NSProcessInfo.h>
 
+#import "PolygonShape.h"
+
 /* Section 1: Strings as file system paths */
-void section1() {
+void PrintPathInfo() {
 	
 	NSString *path = @"~";
 	path = [path stringByExpandingTildeInPath];  
@@ -21,7 +23,7 @@ void section1() {
 }
 
 /* Section 2: Finding out a bit about our own process */
-void section2() {
+void PrintProcessInfo() {
 	
 	NSProcessInfo *proceso = [NSProcessInfo processInfo];
 
@@ -29,7 +31,7 @@ void section2() {
 }
 
 /* Section 3: A little bookmark dictionary */
-void section3(){
+void PrintBookmarkInfo(){
         
 	NSMutableDictionary *aDictionary = [[NSMutableDictionary alloc] init];
     
@@ -55,7 +57,7 @@ void section3(){
 
 
 /* Section 4: Selectors, Classes and Introspection */
-void section4(){
+void PrintIntrospectionInfo(){
 
     NSMutableArray *myArray = [[NSMutableArray alloc] init];
     
@@ -90,14 +92,54 @@ void section4(){
         }
     }
     
+    [myArray autorelease];
+}
+
+void PrintPolygonInfo() {
+    
+    NSMutableArray *myArray = [[NSMutableArray alloc] init];
+    
+    
+    PolygonShape *poly1 = [[PolygonShape alloc] initWithNumberOfSides:4 
+                                  minimumNumberOfSides:3
+                                  maximumNumberOfSides:7];    
+    PolygonShape *poly2 = [[PolygonShape alloc] init];
+        [poly2 setMinimumNumberOfSides:5];
+        [poly2 setMaximumNumberOfSides:9];
+        [poly2 setNumberOfSides:6];
+                        
+    PolygonShape *poly3 = [[PolygonShape alloc] init];
+        [poly3 setMinimumNumberOfSides:9];
+        [poly3 setMaximumNumberOfSides:12];
+        [poly3 setNumberOfSides:12];
+
+    [myArray addObject:poly1];
+    NSLog(@"%@", [poly1 description]);
+    [myArray addObject:poly2]; 
+    NSLog(@"%@", [poly2 description]);
+    [myArray addObject:poly3]; 
+    NSLog(@"%@", [poly3 description]);
+    
+    
+    for (PolygonShape *poly in myArray) {
+        [poly setNumberOfSides:10];
+    }
+    
+    [poly3 release];
+    [poly2 release];
+    [poly1 release];
     [myArray release];
+    
 }
 
 int main (int argc, const char * argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
-    section3();
-	section4();
+    //PrintPathInfo();
+    //PrintProcessInfo();
+    //PrintBookmarkInfo();
+	//PrintIntrospectionInfo();
+    PrintPolygonInfo();
 	
     [pool drain];
     return 0;
